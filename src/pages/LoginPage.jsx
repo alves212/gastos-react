@@ -32,12 +32,24 @@ function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+      {/* 🔥 Vídeo de fundo */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+      >
+        <source src="/fundoLogin.webm" type="video/webm" />
+      </video>
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-900 p-6 rounded-lg shadow-md w-full max-w-sm"
+        className="z-10 bg-gray-900 p-6 rounded-lg shadow-md w-full max-w-sm"
       >
-        <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center text-white">
+          Login
+        </h2>
         <input
           type="email"
           placeholder="E-mail"

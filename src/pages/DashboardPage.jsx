@@ -145,10 +145,7 @@ function DashboardPage() {
         playsInline
         className="absolute top-0 left-0 w-full h-full object-cover z-50 animate-fadeout pointer-events-none"
       >
-        <source
-          src="/c4c31990b995acaffab9645c90328c99.webm"
-          type="video/webm"
-        />
+        <source src="/video.webm" type="video/webm" />
       </video>
 
       {/* 🔲 Escurecimento opcional */}
