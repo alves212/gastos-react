@@ -1,4 +1,3 @@
-// src/pages/DashboardPage.jsx
 import { useEffect, useState } from 'react'
 import { auth, db } from '../firebase'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
@@ -10,9 +9,9 @@ function DashboardPage() {
   const [totalExpenses, setTotalExpenses] = useState(0)
   const [balance, setBalance] = useState(0)
   const [selectedIndex, setSelectedIndex] = useState(null)
-  const [sortMode, setSortMode] = useState('original') // original, asc, desc
+  const [sortMode, setSortMode] = useState('original')
   const [originalOrder, setOriginalOrder] = useState([])
-  const [filterState, setFilterState] = useState(0) // 0: todos, 1: marcados, 2: desmarcados
+  const [filterState, setFilterState] = useState(0)
 
   const navigate = useNavigate()
   const user = auth.currentUser
@@ -112,12 +111,10 @@ function DashboardPage() {
 
   const toggleSort = () => {
     if (sortMode === 'original') {
-      const sorted = [...items].sort((a, b) => a.amount - b.amount)
-      setItems(sorted)
+      setItems([...items].sort((a, b) => a.amount - b.amount))
       setSortMode('asc')
     } else if (sortMode === 'asc') {
-      const sorted = [...items].sort((a, b) => b.amount - a.amount)
-      setItems(sorted)
+      setItems([...items].sort((a, b) => b.amount - a.amount))
       setSortMode('desc')
     } else {
       setItems(originalOrder)
@@ -140,145 +137,164 @@ function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white p-6">
-      <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
+    <div className="relative min-h-screen bg-black text-white p-6 overflow-hidden">
+      {/* 🔥 Vídeo de fundo com efeito de entrada */}
+      <video
+        autoPlay
+        muted
+        playsInline
+        className="absolute top-0 left-0 w-full h-full object-cover z-50 animate-fadeout pointer-events-none"
+      >
+        <source
+          src="/c4c31990b995acaffab9645c90328c99.webm"
+          type="video/webm"
+        />
+      </video>
 
-      <div className="mb-4 flex flex-wrap gap-2">
-        <button
-          onClick={() => addItem('+')}
-          className="bg-green-600 px-5 py-2 rounded hover:bg-green-700"
-        >
-          +
-        </button>
-        <button
-          onClick={() => addItem('-')}
-          className="bg-red-600 px-5 py-2 rounded hover:bg-red-700"
-        >
-          -
-        </button>
-        <button
-          onClick={moveRowUp}
-          className="bg-blue-600 px-3 py-2 rounded hover:bg-blue-700"
-        >
-          ⬆️
-        </button>
-        <button
-          onClick={moveRowDown}
-          className="bg-blue-600 px-3 py-2 rounded hover:bg-blue-700"
-        >
-          ⬇️
-        </button>
-        <button
-          onClick={toggleSort}
-          className="bg-yellow-600 px-3 py-2 rounded hover:bg-yellow-700"
-        >
-          {sortMode === 'original' ? '🔄' : sortMode === 'asc' ? '⬆️' : '⬇️'}
-        </button>
-        <button
-          onClick={toggleFilter}
-          className="bg-purple-600 px-3 py-2 rounded hover:bg-purple-700"
-        >
-          {filterState === 0 ? '📋' : filterState === 1 ? '🟦' : '⬜'}
-        </button>
-        <button
-          onClick={logout}
-          className="ml-auto bg-gray-600 px-2 py-2 rounded hover:bg-gray-700"
-        >
-          Sair
-        </button>
-      </div>
+      {/* 🔲 Escurecimento opcional */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black/70 z-10 pointer-events-none"></div>
 
-      <table className="w-full text-left border-separate border-spacing-y-2 border-spacing-x-1">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Tipo</th>
-            <th>Descrição</th>
-            <th>Valor (R$)</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredItems.map((item, idx) => {
-            const realIndex = items.indexOf(item)
-            return (
-              <tr
-                key={realIndex}
-                onClick={() => setSelectedIndex(realIndex)}
-                className={`${
-                  item.sign === '+' ? 'bg-green-900' : 'bg-red-900'
-                } ${
-                  selectedIndex === realIndex
-                    ? 'outline outline-2 outline-yellow-400'
-                    : ''
-                } py-2`}
-              >
-                <td className="px-3">
-                  <input
-                    type="checkbox"
-                    className="w-5 h-5 accent-blue-900 cursor-pointer"
-                    checked={item.checked || false}
-                    onChange={() => handleChange(realIndex, 'checked')}
-                  />
-                </td>
-                <td
-                  className="cursor-pointer px-3"
-                  onClick={() =>
-                    handleChange(
-                      realIndex,
-                      'sign',
-                      item.sign === '+' ? '-' : '+',
-                    )
-                  }
+      {/* 🔤 Conteúdo principal */}
+      <div className="relative z-20">
+        <h1 className="text-3xl font-bold mb-4 text-center">GASTOS</h1>
+
+        <div className="mb-4 flex flex-wrap gap-2">
+          <button
+            onClick={() => addItem('+')}
+            className="bg-green-600 px-5 py-2 rounded hover:bg-green-700"
+          >
+            +
+          </button>
+          <button
+            onClick={() => addItem('-')}
+            className="bg-red-600 px-5 py-2 rounded hover:bg-red-700"
+          >
+            -
+          </button>
+          <button
+            onClick={moveRowUp}
+            className="bg-blue-600 px-3 py-2 rounded hover:bg-blue-700"
+          >
+            ⬆️
+          </button>
+          <button
+            onClick={moveRowDown}
+            className="bg-blue-600 px-3 py-2 rounded hover:bg-blue-700"
+          >
+            ⬇️
+          </button>
+          <button
+            onClick={toggleSort}
+            className="bg-yellow-600 px-3 py-2 rounded hover:bg-yellow-700"
+          >
+            {sortMode === 'original' ? '🔄' : sortMode === 'asc' ? '⬆️' : '⬇️'}
+          </button>
+          <button
+            onClick={toggleFilter}
+            className="bg-purple-600 px-3 py-2 rounded hover:bg-purple-700"
+          >
+            {filterState === 0 ? '📋' : filterState === 1 ? '🟦' : '⬜'}
+          </button>
+          <button
+            onClick={logout}
+            className="ml-auto bg-gray-600 px-2 py-2 rounded hover:bg-gray-700"
+          >
+            Sair
+          </button>
+        </div>
+
+        <table className="w-full text-left border-separate border-spacing-y-2 border-spacing-x-1">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Tipo</th>
+              <th>Descrição</th>
+              <th>Valor (R$)</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredItems.map((item, idx) => {
+              const realIndex = items.indexOf(item)
+              return (
+                <tr
+                  key={realIndex}
+                  onClick={() => setSelectedIndex(realIndex)}
+                  className={`${
+                    item.sign === '+' ? 'bg-green-900' : 'bg-red-900'
+                  } ${
+                    selectedIndex === realIndex
+                      ? 'outline outline-2 outline-yellow-400'
+                      : ''
+                  } py-2`}
                 >
-                  {item.sign}
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    className="bg-transparent w-full outline-none"
-                    value={item.description}
-                    onChange={(e) =>
-                      handleChange(realIndex, 'description', e.target.value)
+                  <td className="px-3">
+                    <input
+                      type="checkbox"
+                      className="w-5 h-5 accent-blue-900 cursor-pointer"
+                      checked={item.checked || false}
+                      onChange={() => handleChange(realIndex, 'checked')}
+                    />
+                  </td>
+                  <td
+                    className="cursor-pointer px-3"
+                    onClick={() =>
+                      handleChange(
+                        realIndex,
+                        'sign',
+                        item.sign === '+' ? '-' : '+',
+                      )
                     }
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    className="bg-transparent w-full outline-none"
-                    value={item.amount}
-                    onChange={(e) =>
-                      handleChange(realIndex, 'amount', e.target.value)
-                    }
-                  />
-                </td>
-                <td>
-                  <button
-                    onClick={() => removeItem(realIndex)}
-                    className="text-white hover:text-blue-800 text-xl px-3"
                   >
-                    X
-                  </button>
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+                    {item.sign}
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      className="bg-transparent w-full outline-none"
+                      value={item.description}
+                      onChange={(e) =>
+                        handleChange(realIndex, 'description', e.target.value)
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      className="bg-transparent w-full outline-none"
+                      value={item.amount}
+                      onChange={(e) =>
+                        handleChange(realIndex, 'amount', e.target.value)
+                      }
+                    />
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => removeItem(realIndex)}
+                      className="text-white hover:text-blue-800 text-xl px-3"
+                    >
+                      X
+                    </button>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
 
-      <div className="mt-6 grid grid-cols-3 gap-4 text-center">
-        <div className="bg-green-800 p-4 rounded">
-          <h2 className="text-lg font-semibold">Receitas</h2>
-          <p className="text-2xl">R$ {totalIncome.toFixed(2)}</p>
-        </div>
-        <div className="bg-red-800 p-4 rounded">
-          <h2 className="text-lg font-semibold">Despesas</h2>
-          <p className="text-2xl">R$ {totalExpenses.toFixed(2)}</p>
-        </div>
-        <div className="bg-gray-800 p-4 rounded">
-          <h2 className="text-lg font-semibold">Saldo</h2>
-          <p className="text-2xl">R$ {balance.toFixed(2)}</p>
+        <div className="mt-6 grid grid-cols-3 gap-4 text-center">
+          <div className="bg-green-800 p-4 rounded">
+            <h2 className="text-lg font-semibold">Receitas</h2>
+            <p className="text-2xl">R$ {totalIncome.toFixed(2)}</p>
+          </div>
+          <div className="bg-red-800 p-4 rounded">
+            <h2 className="text-lg font-semibold">Despesas</h2>
+            <p className="text-2xl">R$ {totalExpenses.toFixed(2)}</p>
+          </div>
+          <div className="bg-gray-800 p-4 rounded">
+            <h2 className="text-lg font-semibold">Saldo</h2>
+            <p className="text-2xl">R$ {balance.toFixed(2)}</p>
+          </div>
         </div>
       </div>
     </div>
