@@ -151,6 +151,16 @@ function DashboardPage() {
       {/* 🔲 Escurecimento opcional */}
       <div className="absolute top-0 left-0 w-full h-full bg-black/70 z-10 pointer-events-none"></div>
 
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+      >
+        <source src="/fundoLogin.webm" type="video/webm" />
+      </video>
+
       {/* 🔤 Conteúdo principal */}
       <div className="relative z-20">
         <h1 className="text-3xl font-bold mb-4 text-center">GASTOS</h1>
