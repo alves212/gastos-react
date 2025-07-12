@@ -146,49 +146,49 @@ function DashboardPage() {
       <div className="mb-4 flex flex-wrap gap-2">
         <button
           onClick={() => addItem('+')}
-          className="bg-green-600 px-4 py-2 rounded hover:bg-green-700"
+          className="bg-green-600 px-5 py-2 rounded hover:bg-green-700"
         >
           +
         </button>
         <button
           onClick={() => addItem('-')}
-          className="bg-red-600 px-4 py-2 rounded hover:bg-red-700"
+          className="bg-red-600 px-5 py-2 rounded hover:bg-red-700"
         >
           -
         </button>
         <button
           onClick={moveRowUp}
-          className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-blue-600 px-3 py-2 rounded hover:bg-blue-700"
         >
           ⬆️
         </button>
         <button
           onClick={moveRowDown}
-          className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-blue-600 px-3 py-2 rounded hover:bg-blue-700"
         >
           ⬇️
         </button>
         <button
           onClick={toggleSort}
-          className="bg-yellow-600 px-4 py-2 rounded hover:bg-yellow-700"
+          className="bg-yellow-600 px-3 py-2 rounded hover:bg-yellow-700"
         >
           {sortMode === 'original' ? '🔄' : sortMode === 'asc' ? '⬆️' : '⬇️'}
         </button>
         <button
           onClick={toggleFilter}
-          className="bg-purple-600 px-4 py-2 rounded hover:bg-purple-700"
+          className="bg-purple-600 px-3 py-2 rounded hover:bg-purple-700"
         >
           {filterState === 0 ? '📋' : filterState === 1 ? '🟦' : '⬜'}
         </button>
         <button
           onClick={logout}
-          className="ml-auto bg-gray-600 px-4 py-2 rounded hover:bg-gray-700"
+          className="ml-auto bg-gray-600 px-2 py-2 rounded hover:bg-gray-700"
         >
           Sair
         </button>
       </div>
 
-      <table className="w-full text-left border-collapse">
+      <table className="w-full text-left border-separate border-spacing-y-2 border-spacing-x-1">
         <thead>
           <tr>
             <th></th>
@@ -211,17 +211,18 @@ function DashboardPage() {
                   selectedIndex === realIndex
                     ? 'outline outline-2 outline-yellow-400'
                     : ''
-                }`}
+                } py-2`}
               >
-                <td>
+                <td className="px-3">
                   <input
                     type="checkbox"
+                    className="w-5 h-5 accent-blue-900 cursor-pointer"
                     checked={item.checked || false}
                     onChange={() => handleChange(realIndex, 'checked')}
                   />
                 </td>
                 <td
-                  className="cursor-pointer px-2"
+                  className="cursor-pointer px-3"
                   onClick={() =>
                     handleChange(
                       realIndex,
@@ -235,7 +236,7 @@ function DashboardPage() {
                 <td>
                   <input
                     type="text"
-                    className="bg-transparent border-b w-full outline-none"
+                    className="bg-transparent w-full outline-none"
                     value={item.description}
                     onChange={(e) =>
                       handleChange(realIndex, 'description', e.target.value)
@@ -245,7 +246,7 @@ function DashboardPage() {
                 <td>
                   <input
                     type="number"
-                    className="bg-transparent border-b w-full outline-none"
+                    className="bg-transparent w-full outline-none"
                     value={item.amount}
                     onChange={(e) =>
                       handleChange(realIndex, 'amount', e.target.value)
@@ -255,7 +256,7 @@ function DashboardPage() {
                 <td>
                   <button
                     onClick={() => removeItem(realIndex)}
-                    className="text-red-400 hover:text-red-200"
+                    className="text-white hover:text-blue-800 text-xl px-3"
                   >
                     X
                   </button>
