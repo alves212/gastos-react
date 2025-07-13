@@ -1,22 +1,8 @@
-import { Routes, Route } from 'react-router-dom'
-import LoginPage from './pages/LoginPage'
-import DashboardPage from './pages/DashboardPage'
-import PrivateRoute from './components/PrivateRoute'
+// src/App.jsx
+import AppRoutes from './routes/AppRoutes'
 
 function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<LoginPage />} />
-      <Route
-        path="/dashboard"
-        element={
-          <PrivateRoute>
-            <DashboardPage />
-          </PrivateRoute>
-        }
-      />
-    </Routes>
-  )
+  return <AppRoutes />
 }
 
 export default App
