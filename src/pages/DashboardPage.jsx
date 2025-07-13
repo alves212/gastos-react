@@ -401,13 +401,13 @@ function DashboardPage() {
             <div className="flex justify-between">
               <button
                 onClick={() => setShowConfirmModal(false)}
-                className="px-4 py-2 rounded bg-gray-700 text-white hover:bg-gray-600"
+                className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-600"
               >
                 Cancelar
               </button>
               <button
                 onClick={confirmDelete}
-                className="px-4 py-2 rounded bg-red-700 text-white hover:bg-red-600"
+                className="px-4 py-2 rounded bg-red-900 text-white hover:bg-red-600"
               >
                 Excluir
               </button>

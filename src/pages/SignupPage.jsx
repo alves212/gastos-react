@@ -3,18 +3,21 @@ import { useNavigate } from 'react-router-dom'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebase'
 
+// Validação de e-mail
+function isValidEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return regex.test(email)
+}
+
+// Validação de senha
+function isValidPassword(password) {
+  return password.length >= 6
+}
+
 function SignupPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
-  if (!isValidEmail(email)) {
-    alert('E-mail inválido')
-    return
-  }
-  if (!isValidPassword(password)) {
-    alert('A senha deve ter pelo menos 6 caracteres')
-    return
-  }
 
   const handleSignup = async (e) => {
     e.preventDefault()
