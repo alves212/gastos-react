@@ -9,6 +9,11 @@ function LoginPage() {
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
 
+  useEffect(() => {
+    const img = new Image()
+    img.src = '/skull.png'
+  }, [])
+
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   const isValidPassword = (password) => password.length >= 6
 
@@ -47,7 +52,7 @@ function LoginPage() {
 
     setTimeout(() => {
       navigate('/signup')
-    }, 600)
+    }, 1000)
   }
 
   return (
@@ -69,6 +74,7 @@ function LoginPage() {
           <img
             src="/skull.png"
             alt="Explosão"
+            loading="eager"
             className="w-20 h-20 animate-growImage origin-center"
           />
         </div>
