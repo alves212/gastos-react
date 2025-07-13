@@ -213,25 +213,25 @@ function DashboardPage() {
           </button>
           <button
             onClick={moveRowUp}
-            className="bg-blue-700 px-3 py-2 rounded hover:bg-blue-600"
+            className="bg-blue-700 px-2 py-2 rounded hover:bg-blue-600"
           >
             ⬆️
           </button>
           <button
             onClick={moveRowDown}
-            className="bg-blue-700 px-3 py-2 rounded hover:bg-blue-600"
+            className="bg-blue-700 px-2 py-2 rounded hover:bg-blue-600"
           >
             ⬇️
           </button>
           <button
             onClick={toggleSort}
-            className="bg-yellow-700 px-3 py-2 rounded hover:bg-yellow-600"
+            className="bg-yellow-700 px-2 py-2 rounded hover:bg-yellow-600"
           >
             {sortMode === 'original' ? '🔄' : sortMode === 'asc' ? '⬆️' : '⬇️'}
           </button>
           <button
             onClick={toggleFilter}
-            className="bg-purple-700 px-3 py-2 rounded hover:bg-purple-600"
+            className="bg-purple-700 px-2 py-2 rounded hover:bg-purple-600"
           >
             {filterState === 0 ? '📋' : filterState === 1 ? '🟦' : '⬜'}
           </button>
