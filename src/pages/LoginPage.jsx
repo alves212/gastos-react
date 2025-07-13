@@ -35,13 +35,19 @@ function LoginPage() {
 
   const handleCreateAccountClick = () => {
     if (showImage) return
+
     setShowImage(true)
-    const timer = setTimeout(() => {
+
+    // 🎵 Reproduz o grito horripilante
+    const scream = new Audio('/scream.mp3')
+    scream.volume = 0.7 // opcional: ajuste o volume
+    scream.play().catch(() => {
+      // Algumas vezes o navegador bloqueia, mas seguimos com o fluxo
+    })
+
+    setTimeout(() => {
       navigate('/signup')
     }, 600)
-
-    // Segurança: limpar timer se necessário futuramente
-    return () => clearTimeout(timer)
   }
 
   return (
@@ -57,18 +63,18 @@ function LoginPage() {
         <source src="/fundoLogin.webm" type="video/webm" />
       </video>
 
-      {/* 💥 Animação da caveira crescendo */}
+      {/* 💀 Animação da caveira */}
       {showImage && (
         <div className="absolute inset-0 flex items-center justify-center z-50 pointer-events-none">
           <img
             src="/skull.png"
             alt="Explosão"
-            className="w-20 h-20 animate-growImage"
+            className="w-20 h-20 animate-growImage origin-center"
           />
         </div>
       )}
 
-      {/* 🧾 Formulário de login */}
+      {/* 🧾 Formulário */}
       <form
         onSubmit={handleSubmit}
         className="z-10 bg-gray-900 p-6 rounded-lg shadow-md w-full max-w-sm"

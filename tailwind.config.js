@@ -25,8 +25,8 @@ export default {
         },
         growImage: {
           '0%': { transform: 'scale(0)', opacity: 0 },
-          '70%': { transform: 'scale(80)', opacity: 1 },
-          '100%': { transform: 'scale(80)', opacity: 0 },
+          '70%': { transform: 'scale(20)', opacity: 1 },
+          '100%': { transform: 'scale(20)', opacity: 0 },
         },
       },
     },
