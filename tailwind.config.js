@@ -1,4 +1,3 @@
-// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
@@ -12,6 +11,7 @@ export default {
       animation: {
         'pulse-scale': 'pulse-scale 0.5s ease-out',
         'shine-text': 'shine 1s ease-in-out forwards',
+        growImage: 'growImage 0.6s ease-out forwards',
       },
       keyframes: {
         'pulse-scale': {
@@ -20,12 +20,13 @@ export default {
           '100%': { transform: 'scale(0,1)' },
         },
         shine: {
-          '0%': {
-            backgroundPosition: '-200%',
-          },
-          '100%': {
-            backgroundPosition: '200%',
-          },
+          '0%': { backgroundPosition: '-200%' },
+          '100%': { backgroundPosition: '200%' },
+        },
+        growImage: {
+          '0%': { transform: 'scale(0)', opacity: 0 },
+          '70%': { transform: 'scale(80)', opacity: 1 },
+          '100%': { transform: 'scale(80)', opacity: 0 },
         },
       },
     },

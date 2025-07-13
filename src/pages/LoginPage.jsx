@@ -1,18 +1,15 @@
-// src/pages/LoginPage.jsx
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-} from 'firebase/auth'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebase'
 
 function LoginPage() {
+  const [showImage, setShowImage] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
-  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   const isValidPassword = (password) => password.length >= 6
 
   const handleSubmit = async (e) => {
@@ -36,6 +33,17 @@ function LoginPage() {
     }
   }
 
+  const handleCreateAccountClick = () => {
+    if (showImage) return
+    setShowImage(true)
+    const timer = setTimeout(() => {
+      navigate('/signup')
+    }, 600)
+
+    // Segurança: limpar timer se necessário futuramente
+    return () => clearTimeout(timer)
+  }
+
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* 🔥 Vídeo de fundo */}
@@ -48,6 +56,19 @@ function LoginPage() {
       >
         <source src="/fundoLogin.webm" type="video/webm" />
       </video>
+
+      {/* 💥 Animação da caveira crescendo */}
+      {showImage && (
+        <div className="absolute inset-0 flex items-center justify-center z-50 pointer-events-none">
+          <img
+            src="/skull.png"
+            alt="Explosão"
+            className="w-20 h-20 animate-growImage"
+          />
+        </div>
+      )}
+
+      {/* 🧾 Formulário de login */}
       <form
         onSubmit={handleSubmit}
         className="z-10 bg-gray-900 p-6 rounded-lg shadow-md w-full max-w-sm"
@@ -78,8 +99,8 @@ function LoginPage() {
           Entrar
         </button>
         <p
-          onClick={() => navigate('/signup')}
-          className="text-sm text-center mt-2 cursor-pointer bg-gradient-to-r from-white bg-[length:100%] bg-clip-text text-transparent transition duration-300 active:scale-110 active:animate-pulse-scale"
+          onClick={handleCreateAccountClick}
+          className="text-sm text-center mt-2 cursor-pointer bg-gradient-to-r from-white bg-[length:100%] bg-clip-text text-transparent transition duration-300 active:scale-110"
         >
           Criar conta
         </p>
