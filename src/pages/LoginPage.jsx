@@ -52,7 +52,7 @@ function LoginPage() {
 
     setTimeout(() => {
       navigate('/signup')
-    }, 1000)
+    }, 2000)
   }
 
   return (

@@ -30,7 +30,7 @@ function DashboardPage() {
     }
 
     const fetchData = async () => {
-      const userDoc = doc(db, 'financeData', user.uid)
+      const userDoc = doc(db, 'users', user.uid)
       const snapshot = await getDoc(userDoc)
       if (snapshot.exists()) {
         const data = snapshot.data().items || []
@@ -59,7 +59,7 @@ function DashboardPage() {
 
   const saveToFirestore = async (updatedItems) => {
     if (!user) return
-    const userDoc = doc(db, 'financeData', user.uid)
+    const userDoc = doc(db, 'users', user.uid)
     await setDoc(userDoc, { items: updatedItems })
   }
 
